@@ -1,0 +1,25 @@
+extends layout.pug
+
+block title
+  = " ━ API"
+
+block content
+  .mx-auto.p-3.position-relative
+    include includes/back.pug
+    .text-center
+      h1 API
+      p The server accepts <strong>GET</strong> request only
+    main.d-grid.gap-3.p-2.mt-4.bg-dark.bg-gradient.text-light.rounded-3.border.border-primary.shadow-lg
+      section
+        - var search_api = "/api/search";
+        header: h3 Route: 
+          a(href=search_api): strong #{search_api}{parameters}
+        p Use this endpoint according to the 
+          a(href="https://pixabay.com/api/docs/" target="_blank") Pixabay API documentation
+        p <b class="text-danger">*</b>The default value of the <strong>per_page</strong> parameter is 200 instead of 20
+      if show_recent
+        section
+          - var recent_api = "/api/recent";
+          header: h3 Route: 
+            a(href=recent_api): strong= recent_api
+          p Returns the last 100 searches

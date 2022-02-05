@@ -1,0 +1,23 @@
+{
+  "name": "image-search-abstraction-layer",
+  "version": "2.1.1",
+  "description": "A simple image search website. It makes use of the Pixabay API.",
+  "main": "index.js",
+  "author": "SSbit01",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "mongoose": "^5.12.10",
+    "node-fetch": "^2.6.6",
+    "pug": "^3.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SSbit01/Image-Search-Abstraction-Layer"
+  }
+}

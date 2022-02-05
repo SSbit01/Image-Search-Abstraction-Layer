@@ -1,0 +1,7 @@
+form(action="search").d-flex.gap-4.p-2.bg-dark.bg-gradient.bg-opacity-10.rounded-3.border.border-primary.shadow-lg
+  .input-group
+    input.form-control(type="search" name="q" maxlength="100"  placeholder="Cats..." value=q required autofocus)
+    button.btn.btn-success(type="submit"): i.bi.bi-search
+  .d-flex.gap-2
+    label.col-form-label.navbar-text(for="page") Page
+    input#page.form-control(type="number" name="page" min="1" value=page||1)

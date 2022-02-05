@@ -1,0 +1,23 @@
+extends layout.pug
+
+block title
+  = " ━ Recent Searches"
+
+block content
+  .mx-auto.p-3.position-relative
+    include includes/back.pug
+    if Array.isArray(data)
+      table.table.table-striped.border.shadow-lg
+        thead
+          tr
+            th(scope="col") #
+            th(scope="col") Search string
+            th(scope="col") Date
+        tbody
+          each search, i in data
+            tr
+              th(scope="row")= i
+              td= search.search
+              td= new Date(search.date).toLocaleString()
+    else
+      h1 An error occurred

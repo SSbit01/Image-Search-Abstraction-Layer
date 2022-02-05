@@ -1,0 +1,13 @@
+extends layout.pug
+
+block content
+  .mx-auto.p-3.d-grid.gap-5
+    .text-center
+      h1 Image Search Abstraction Layer
+      p Created By 
+        a(href="https://github.com/SSbit01" target="_blank") SSbit01
+    include includes/form.pug
+    .btn-group-vertical.border.shadow-lg(role="group")
+      a.btn.btn-primary(href="/api") API
+      if show_recent
+        a.btn.btn-secondary(href="/recent") Recent Searches
