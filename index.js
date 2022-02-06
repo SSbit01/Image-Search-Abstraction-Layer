@@ -1,31 +1,26 @@
 require("dotenv").config();
 
-const express = require("express");
-const helmet = require("helmet");
-const pug = require("pug");
-
-const {Search, GetRecentSearches} = require("./lib");
-const show_recent = GetRecentSearches instanceof Function;
-
-const apiRoutes = require("./api.js");
-
-const port = process.env.PORT || 3000;
-
-const app = express();
-
-apiRoutes(app);
-
-// Compile the Pages
 function GetViewPath(file) {
   return `./views/${file}.pug`;
 }
 
-const _404_page = pug.renderFile(GetViewPath("404"));
-const index_page = pug.renderFile(GetViewPath("index"), {show_recent});
-const api_page = pug.renderFile(GetViewPath("api"), {show_recent});
-const render_search_page = pug.compileFile(GetViewPath("search"));
-const render_recent_page = pug.compileFile(GetViewPath("recent"));
-//
+const express = require("express"),
+      helmet = require("helmet"),
+      pug = require("pug"),
+      {Search, GetRecentSearches} = require("./lib"),
+      show_recent = GetRecentSearches instanceof Function,
+      apiRoutes = require("./api.js"),
+      port = process.env.PORT || 3000,
+      app = express(),
+      // Compile the Pages
+      _404_page = pug.renderFile(GetViewPath("404")),
+      index_page = pug.renderFile(GetViewPath("index"), {show_recent}),
+      api_page = pug.renderFile(GetViewPath("api"), {show_recent}),
+      render_search_page = pug.compileFile(GetViewPath("search"));
+      //
+
+
+apiRoutes(app);
 
 app.use(helmet({
   contentSecurityPolicy: false
@@ -46,16 +41,19 @@ app.route("/api").get((req, res) => {
 
 
 app.route("/search").get(async({query}, res) => {
-  let {q, page} = query;
-  if (!page) page = 1;
+  let {q, page} = query,
+      images = await Search(query);
 
-  let images = await Search(query);
+  if (!page) page = 1;
   if (!Array.isArray(images)) images = [];
 
   res.send(render_search_page({q, page, images, show_recent}));
 });
 
+
 if (show_recent) {
+  const render_recent_page = pug.compileFile(GetViewPath("recent"));
+
   app.route("/recent").get(async(req, res) => {
     let data = await GetRecentSearches();
     if (!Array.isArray(data)) data = undefined;

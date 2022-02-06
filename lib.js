@@ -5,9 +5,8 @@ let SearchString = null;
 
 
 if (process.env.MONGO_URI) {
-  const {connect, models, model, Schema} = require("mongoose");
-
-  const model_name = "ISAL History";
+  const {connect, models, model, Schema} = require("mongoose"),
+        model_name = "ISAL History";
 
   SearchString = models[model_name];
 
@@ -24,7 +23,7 @@ if (process.env.MONGO_URI) {
       }
     }));
   }
-} else console.warn("Server didn't find a MONGO_URI variable in .env, recent searches route has been disabled.");
+} else console.warn("Server didn't find a MONGO_URI variable in the .env file, recent searches route has been disabled.");
 
 
 module.exports = {
