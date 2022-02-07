@@ -23,7 +23,7 @@ if (process.env.MONGO_URI) {
       }
     }));
   }
-} else console.warn("Server didn't find a MONGO_URI variable in the .env file, recent searches route has been disabled.");
+} else console.warn("Server didn't find the MONGO_URI environment variable, recent searches route has been disabled.");
 
 
 module.exports = {
