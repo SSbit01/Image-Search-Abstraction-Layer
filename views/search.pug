@@ -10,12 +10,11 @@ block content
     button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
       span.navbar-toggler-icon
     #navbarContent.collapse.navbar-collapse
-      ul.navbar-nav.me-3
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
         li.nav-item: a.nav-link(href="/api") API
         if show_recent
           li.nav-item: a.nav-link(href="/recent") Recent Searches
-      .ms-auto
-        include includes/form.pug
+      include includes/form.pug
   .text-center
     if Array.isArray(images) && images.length
       each i in images
