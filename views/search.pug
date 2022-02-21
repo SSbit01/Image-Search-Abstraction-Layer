@@ -20,6 +20,6 @@ block content
     if Array.isArray(images) && images.length
       each i in images
         a(href=i.pageURL target="_blank")
-          img.m-1(src=i.previewURL alt=i.tags title=i.tags)
+          img.img-thumbnail.m-1(src=i.previewURL alt=i.tags title=i.tags)
     else
       h1.mx-2 Ooops! There are no results :(
