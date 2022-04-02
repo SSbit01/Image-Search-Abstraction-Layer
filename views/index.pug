@@ -1,13 +1,13 @@
 extends layout.pug
 
 block content
-  .mx-auto.p-3.d-grid.gap-5
+  .m-auto.p-3.d-grid.gap-5
     .text-center
-      h1 Image Search Abstraction Layer
-      p Created By 
-        a(href="https://github.com/SSbit01" target="_blank") SSbit01
-    include includes/form.pug
-    .btn-group-vertical.border.shadow(role="group")
-      a.btn.btn-primary(href="/api") API
+      h1 #[i.bi.bi-images.me-3]#[b I]mage #[b S]earch#[i.bi.bi-search.mx-3]#[b A]bstraction #[b L]ayer#[i.bi.bi-layers.ms-3]
+      a.btn.btn-link.btn-lg(href="https://github.com/SSbit01" target="_blank") Created By #[strong: i SSbit01]
+    include includes/mixins/searchForm.pug
+    +searchForm(true)
+    .btn-group-vertical.btn-group-lg.shadow(role="group")
+      a.btn.btn-primary(href="/api") #[i.bi.bi-server.me-2]API
       if show_recent
-        a.btn.btn-secondary(href="/recent") Recent Searches
+        a.btn.btn-secondary(href="/recent") #[i.bi.bi-clock-history.me-2]Recent Searches

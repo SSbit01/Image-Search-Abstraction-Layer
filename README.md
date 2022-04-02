@@ -1,9 +1,12 @@
-# Image Search Abstraction Layer
+# **I**mage **S**earch **A**bstraction **L**ayer
 
-A simple image search website. It makes use of the <a  href="https://pixabay.com/api/docs/"  target="_blank">Pixabay API</a>
+## It's simple image search website that makes use of the *[Pixabay API](https://pixabay.com/api/docs/)*
 
-Make sure to create an `.env` file with the `KEY` (Pixabay Key) variable and install local packages (`npm install`) before starting
+### Make sure to define the `KEY` (*Pixabay Key*) environment variable and install local packages (`npm i`) before running `npm start`
 
-Also you can specify a `MONGO_URI` in the `.env` file, which allows the server to store search history
+---
 
-If you want to change the server port, which is `3000` by default, you can specify it in the `.env` file with the `PORT` variable
+- It's strongly recommended to assign the `NODE_ENV` environment variable to `production`
+  - [Read more](https://expressjs.com/en/advanced/best-practice-performance.html#set-node_env-to-production)
+- Also, you can declare the `MONGO_URI` environment variable, which allows the server to store **search history**
+- If you want to change the server port, which is `3000` by default, you can do it with the `PORT` environment variable

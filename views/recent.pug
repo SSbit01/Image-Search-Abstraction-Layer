@@ -1,23 +1,24 @@
 extends layout.pug
 
-block title
-  = "ISAL ━ Recent Searches"
-
 block content
-  .mx-auto.p-3.position-relative
-    include includes/back.pug
-    if Array.isArray(data)
-      table.table.table-striped.border.shadow
+  include includes/back.pug
+  if Array.isArray(data)
+    .container.mt-4
+      table.table.table-hover.border.shadow-sm
+        caption #[i.bi.bi-clock-history.me-2]Recent Searches
         thead
           tr
-            th(scope="col") #
-            th(scope="col") Search string
-            th(scope="col") Date
+            th(scope="col"): i.bi.bi-hash
+            th(scope="col") Search String
+            th(scope="col") Date#[i.bi.bi-calendar2-date.mx-2]#[i.bi.bi-clock]
         tbody
-          each search, i in data
+          each item, i in data
             tr
-              th(scope="row")= i
-              td= search.search
-              td= new Date(search.date).toLocaleString()
-    else
-      h1 An error occurred
+              th(scope="row")= i + 1
+              td.text-break= item.search
+              td= new Date(item.date).toLocaleString()
+          else
+            tr
+              th.text-center(colspan="3") No Recent Searches
+  else
+    h1.m-auto An error occurred#[i.bi.bi-emoji-frown-fill.text-warning.m-3]
