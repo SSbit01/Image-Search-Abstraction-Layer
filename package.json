@@ -1,6 +1,6 @@
 {
   "name": "image-search-abstraction-layer",
-  "version": "2.5",
+  "version": "2.5.0",
   "description": "A simple image search website that makes use of the Pixabay API",
   "main": "index.js",
   "author": "SSbit01",
