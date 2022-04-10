@@ -8,11 +8,11 @@ block content
       h4 The server accepts <strong>GET</strong> request only
     ul.list-group.shadow.mt-4
       li.list-group-item.list-group-item-success
-        - var search_api = "/api/search"
-        h3 Route: #[a(href=search_api): strong #{search_api}{parameters}]
+        - const SEARCH_API = "/api/search"
+        h3 Route: #[a(href=SEARCH_API): strong #{SEARCH_API}{parameters}]
         p Use this endpoint according to the #[a(href="https://pixabay.com/api/docs/" target="_blank") Pixabay API documentation]
       if showRecent
         li.list-group-item.list-group-item-secondary
-          - var recent_api = "/api/recent"
-          h3 Route: #[a(href=recent_api): strong= recent_api]
+          - var RECENT_API = "/api/recent"
+          h3 Route: #[a(href=RECENT_API): strong= RECENT_API]
           p Returns the last #[strong 100] search strings submitted to the server
