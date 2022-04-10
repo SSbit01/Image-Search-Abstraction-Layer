@@ -1,12 +1,12 @@
 import "dotenv/config"
 import express from "express"
 import helmet from "helmet"
-import {Search, GetRecentSearches} from "./lib"
-import ApiRoutes from "./api"
+import {search, getRecentSearches} from "./lib"
+import apiRoutes from "./api"
 
 
 
-const show_recent = GetRecentSearches instanceof Function,
+const showRecent = getRecentSearches instanceof Function,
       //
       port = process.env.PORT || 3000,
       //
@@ -28,27 +28,27 @@ app.set("view engine", "pug")
 
 
 // Routes
-ApiRoutes(app)
+apiRoutes(app)
 
 
 app.route("/").get((req, res) => {
-  res.render("index", {show_recent})
+  res.render("index", {showRecent})
 })
 
 
 app.route("/api").get((req, res) => {
-  res.render("api", {show_recent})
+  res.render("api", {showRecent})
 })
 
 
 app.route("/search").get(async({query}, res) => {
-  const custom_query = {...query}
-  custom_query.per_page ??= "200"
+  const CUSTOM_QUERY = {...query}
+  CUSTOM_QUERY.per_page ??= "200"
 
-  const {totalHits: total, hits} = await Search(custom_query)
+  const {totalHits: total, hits} = await search(CUSTOM_QUERY)
 
   res.render("search", {
-    show_recent,
+    showRecent,
     query,
     total,
     images: hits?.map(({
@@ -64,9 +64,9 @@ app.route("/search").get(async({query}, res) => {
 })
 
 
-if (show_recent) {
+if (showRecent) {
   app.route("/recent").get(async(req, res) => {
-    res.render("recent", {data: await GetRecentSearches?.()})
+    res.render("recent", {data: await getRecentSearches?.()})
   })
 }
 

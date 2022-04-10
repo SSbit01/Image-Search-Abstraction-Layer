@@ -11,7 +11,7 @@ block content
         - var search_api = "/api/search"
         h3 Route: #[a(href=search_api): strong #{search_api}{parameters}]
         p Use this endpoint according to the #[a(href="https://pixabay.com/api/docs/" target="_blank") Pixabay API documentation]
-      if show_recent
+      if showRecent
         li.list-group-item.list-group-item-secondary
           - var recent_api = "/api/recent"
           h3 Route: #[a(href=recent_api): strong= recent_api]

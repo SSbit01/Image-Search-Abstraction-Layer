@@ -1,16 +1,16 @@
 import {connect, models, model, Schema} from "mongoose"
 
 
-let SearchString: any;
+let searchString: any;
 
 if (process.env.MONGO_URI) {
-  const model_name = "Searches"
+  const MODEL_NAME = "Searches"
 
-  SearchString = models[model_name]
+  searchString = models[MODEL_NAME]
 
-  if (!SearchString) {
+  if (!searchString) {
     connect(process.env.MONGO_URI)
-    SearchString = model(model_name, new Schema({
+    searchString = model(MODEL_NAME, new Schema({
       search: {
         type: String,
         required: true
@@ -24,13 +24,13 @@ if (process.env.MONGO_URI) {
 } else console.warn("Server didn't find the MONGO_URI environment variable, recent searches route has been disabled.")
 
 
-export function Search(query: {
+export function search(query: {
   [key: string]: any
 }) {
   return fetch(`https://pixabay.com/api/?key=${process.env.KEY}&${new URLSearchParams(query)}`)
            .then(res => res.json())
            .then(result => {
-             if (query.hasOwnProperty("q") && SearchString) new SearchString({search: query.q}).save()
+             if (typeof query.q == "string" && query.q && searchString) new searchString({search: query.q}).save()
              return result
            })
            .catch(() => ({}))
@@ -38,6 +38,6 @@ export function Search(query: {
 }
 
 
-export const GetRecentSearches = SearchString ? function(select = "search date -_id") {
-  return SearchString.find({}).select(select).sort({"date": -1}).limit(100)
+export const getRecentSearches = searchString ? function(select = "search date -_id") {
+  return searchString.find({}).select(select).sort({"date": -1}).limit(100)
 } : null
