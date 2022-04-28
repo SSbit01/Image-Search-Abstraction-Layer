@@ -2,11 +2,11 @@ extends layout.pug
 
 block content
   include includes/back.pug
-  .m-auto.p-3
-    .text-center
-      h1 #[i.bi.bi-server.me-2]API
-      h4 The server accepts <strong>GET</strong> request only
-    ul.list-group.shadow.mt-4
+  header.container.text-center.mx-auto.mt-auto
+    h1 #[i.bi.bi-server.me-2]API
+    h4 The server accepts #[strong GET] request only
+  main.container.mx-auto.mb-auto
+    ul.list-group.shadow
       li.list-group-item.list-group-item-success
         - const SEARCH_API = "/api/search"
         h3 Route: #[a(href=SEARCH_API): strong #{SEARCH_API}{parameters}]

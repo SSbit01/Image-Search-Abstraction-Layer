@@ -1,10 +1,10 @@
 extends layout.pug
 
 block content
-  .m-auto.p-3.d-grid.gap-5
-    .text-center
-      h1 #[i.bi.bi-images.me-3]#[b I]mage #[b S]earch#[i.bi.bi-search.mx-3]#[b A]bstraction #[b L]ayer#[i.bi.bi-layers.ms-3]
-      a.btn.btn-link.btn-lg(href="https://github.com/SSbit01" target="_blank") Created By #[strong: i SSbit01]
+  header.container.text-center.mx-auto.mt-auto
+    h1 #[i.bi.bi-images.me-3]#[b I]mage #[b S]earch#[i.bi.bi-search.mx-3]#[b A]bstraction #[b L]ayer#[i.bi.bi-layers.ms-3]
+    a.btn.btn-link.btn-lg(href="https://github.com/SSbit01" target="_blank") Created By #[strong: i SSbit01]
+  main.container.d-grid.gap-5.mx-auto.mb-auto
     include includes/mixins/searchForm.pug
     +searchForm(true)
     .btn-group-vertical.btn-group-lg.shadow(role="group")
