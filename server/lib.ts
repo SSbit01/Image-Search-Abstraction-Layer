@@ -5,9 +5,7 @@ let searchString: any;
 
 if (process.env.MONGO_URI) {
   const MODEL_NAME = "Searches"
-
   searchString = models[MODEL_NAME]
-
   if (!searchString) {
     connect(process.env.MONGO_URI)
     searchString = model(MODEL_NAME, new Schema({
