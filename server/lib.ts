@@ -1,14 +1,14 @@
 import {connect, models, model, Schema} from "mongoose"
 
 
-let searchString: any;
+let SearchString: any;
 
 if (process.env.MONGO_URI) {
   const MODEL_NAME = "Searches"
-  searchString = models[MODEL_NAME]
-  if (!searchString) {
+  SearchString = models[MODEL_NAME]
+  if (!SearchString) {
     connect(process.env.MONGO_URI)
-    searchString = model(MODEL_NAME, new Schema({
+    SearchString = model(MODEL_NAME, new Schema({
       search: {
         type: String,
         required: true
@@ -28,7 +28,7 @@ export function search(query: {
   return fetch(`https://pixabay.com/api/?key=${process.env.KEY}&${new URLSearchParams(query)}`)
            .then(res => res.json())
            .then(result => {
-             if (typeof query.q == "string" && query.q && searchString) new searchString({search: query.q}).save()
+             if (typeof query.q == "string" && query.q && SearchString) new SearchString({search: query.q}).save()
              return result
            })
            .catch(() => ({}))
@@ -36,6 +36,6 @@ export function search(query: {
 }
 
 
-export const getRecentSearches = searchString ? function(select = "search date -_id") {
-  return searchString.find({}).select(select).sort({"date": -1}).limit(100)
+export const getRecentSearches = SearchString ? function(select = "search date -_id") {
+  return SearchString.find({}).select(select).sort({"date": -1}).limit(100)
 } : null
