@@ -10,7 +10,7 @@ export default function(app: Express) {
   
   if (getRecentSearches instanceof Function) {
     app.get("/api/recent", async(req, res) => {
-      res.json(await getRecentSearches?.())
+      res.send(await getRecentSearches?.())
     })
   }
 }

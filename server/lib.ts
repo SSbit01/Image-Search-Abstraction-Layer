@@ -38,6 +38,6 @@ export function search(query: {
 }
 
 
-export const getRecentSearches = SearchString ? function(select = "search date -_id") {
-  return SearchString.find({}).select(select).sort({"date": -1}).limit(100)
-} : null
+export const getRecentSearches = SearchString && function(select = "search date -_id") {
+  return SearchString.find({}).select(select).sort({"date": -1}).limit(100).lean()
+}

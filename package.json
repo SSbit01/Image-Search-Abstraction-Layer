@@ -1,6 +1,6 @@
 {
   "name": "image-search-abstraction-layer",
-  "version": "2.6.6",
+  "version": "2.6.7",
   "description": "A simple image search website that makes use of the Pixabay API",
   "main": "server/index.ts",
   "author": "SSbit01",
@@ -9,6 +9,7 @@
     "start": "npx ts-node server/index.ts"
   },
   "dependencies": {
+    "@types/express": "^4.17.13",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "helmet": "^5.1.0",
