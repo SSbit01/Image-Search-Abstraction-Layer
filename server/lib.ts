@@ -4,7 +4,7 @@ import {connect, models, model, Schema} from "mongoose"
 let SearchString: any;
 
 if (process.env.MONGO_URI) {
-  const MODEL_NAME = "Searches"
+  const MODEL_NAME = "searches"
   SearchString = models[MODEL_NAME]
   if (!SearchString) {
     connect(process.env.MONGO_URI)
@@ -12,10 +12,12 @@ if (process.env.MONGO_URI) {
       search: {
         type: String,
         required: true
-      },
-      date: {
-        type: Date,
-        default: Date.now
+      }
+    }, {
+      versionKey: false,
+      timestamps: {
+        createdAt: "date",
+        updatedAt: false
       }
     }))
   }
