@@ -1,0 +1,8 @@
+extends layout.pug
+
+block content
+  include includes/back.pug
+  .m-auto.text-center.p-3
+    h1.fw-bold 404: Not Found#[i.bi.bi-bug-fill.text-danger.ms-3]
+    h2 You just hit a route that doesn&#39;t exist... the sadness#[i.bi.bi-emoji-frown-fill.text-warning.m-3]
+    a.btn.btn-lg.btn-primary.mt-2(href="/") Go To Home#[i.bi.bi-house-door-fill.ms-2]

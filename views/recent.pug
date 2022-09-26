@@ -1,0 +1,26 @@
+extends layout.pug
+
+block content
+  include includes/back.pug
+  if Array.isArray(data)
+    if data.length
+      main.container.m-auto
+        table.table.table-hover.border.shadow-sm
+          caption #[i.bi.bi-clock-history.me-2]Recent Searches
+          thead
+            tr
+              th(scope="col"): i.bi.bi-hash
+              th(scope="col") Search String
+              th(scope="col") Date#[i.bi.bi-calendar2-date.mx-2]#[i.bi.bi-clock]
+          tbody.table-group-divider
+            each search, i in data
+              tr
+                th(scope="row")= i + 1
+                td.text-break= search.value
+                td= new Date(search.date).toLocaleString()
+    else
+      header.m-auto
+        h1.text-center.mt-4.mx-3 No Recent Searches#[i.bi.bi-calendar-x.m-3]
+  else
+    header.m-auto
+      h1.text-center.mt-4.mx-3 An error occurred#[i.bi.bi-emoji-frown-fill.text-warning.m-3]

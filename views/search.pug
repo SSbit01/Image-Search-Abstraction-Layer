@@ -1,0 +1,39 @@
+extends layout.pug
+
+block content
+  script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous")
+  - const BREAKPOINT = "md"
+  - const IMAGES_LENGTH = (images || "").length
+  header.sticky-top: nav.navbar.navbar-dark.bg-dark.px-4.border-bottom.shadow-sm(class=`navbar-expand-${BREAKPOINT}`)
+    a.navbar-brand(href="/" title="Go to Home") #[i.bi.bi-images.me-2]ISAL
+    button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation")
+      span.navbar-toggler-icon
+    #navbarContent.collapse.navbar-collapse.pb-2(class=`pb-${BREAKPOINT}-0`)
+      ul.navbar-nav.me-auto.mb-2(class=`mb-${BREAKPOINT}-0`)
+        li.nav-item: a.nav-link(href="/api") #[i.bi.bi-server.me-2]API
+        li.nav-item: a.nav-link(href="/recent") #[i.bi.bi-clock-history.me-2]Recent Searches
+      include includes/mixins/searchForm.pug
+      +searchForm
+  main.text-center.mb-3.px-1.px-sm-2
+    if IMAGES_LENGTH
+      each image in images
+        a(href=image.url target="_blank")
+          img.img-thumbnail.m-1.shadow-sm(src=image.preview width=image.width height=image.height alt=image.tags title=image.tags loading="lazy")
+    else
+      h1.mx-2 Ooops! There are no results#[i.bi.bi-emoji-frown-fill.text-warning.m-3]
+  nav.mx-auto
+    - const {page = 1, ...rest} = query
+    - const {per_page = 200} = rest
+    - const URL = `/search?${new URLSearchParams(rest)}`
+    ul.pagination.pagination-lg
+      unless page < 2 || !IMAGES_LENGTH
+        li.page-item(title="Previous Page"): a.page-link.bi.bi-chevron-double-left(href=`${URL}&page=${+page - 1}`)
+      - let i = 1
+      while per_page * (i - 1) < total
+        if i == page
+          li.page-item.active(title=`Current Page: ${page}` aria-current="page"): span.page-link= page
+        else
+          li.page-item(title=`Page ${i}`): a.page-link(href=`${URL}&page=${i}`)= i
+        - i++
+      if per_page * page < total
+        li.page-item(title="Next Page"): a.page-link.bi.bi-chevron-double-right(href=`${URL}&page=${+page + 1}`)

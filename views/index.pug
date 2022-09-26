@@ -1,0 +1,12 @@
+extends layout.pug
+
+block content
+  header.container.text-center.mx-auto.mt-auto
+    h1.mt-3 #[i.bi.bi-images.me-3]#[b I]mage #[b S]earch#[i.bi.bi-search.mx-3]#[b A]bstraction #[b L]ayer#[i.bi.bi-layers.ms-3]
+    a.btn.btn-link.btn-lg(href="https://github.com/SSbit01" target="_blank") Created By #[strong: i SSbit01]
+  main.container-md.d-grid.gap-5.mx-auto.mb-auto
+    include includes/mixins/searchForm.pug
+    +searchForm(true)
+    .btn-group-vertical.btn-group-lg.shadow.mb-3(role="group")
+      a.btn.btn-primary(href="/api") #[i.bi.bi-server.me-2]API
+      a.btn.btn-secondary(href="/recent") #[i.bi.bi-clock-history.me-2]Recent Searches
