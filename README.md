@@ -1,6 +1,6 @@
 # Image Search Abstraction Layer
 
-It's simple image search website that makes use of the [*Pixabay API*](https://pixabay.com/api/docs/).
+It's a simple image search website that makes use of the [*Pixabay API*](https://pixabay.com/api/docs/).
 
 Make sure to define the `KEY` (*Pixabay Key*) environment variable and install local packages.
 
