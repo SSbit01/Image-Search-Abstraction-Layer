@@ -44,19 +44,17 @@ app.route("/api").get((req, res) => {
 app.route("/search").get(async({query}, res) => {
   query.per_page ??= "200"
 
-  const {totalHits: total, hits} = await search(query)
+  const results = await search(query)
 
   res.render("search", {
     query,
-    total,
-    images: hits?.map(({
+    total: results?.totalHits,
+    images: results?.hits.map(({
       pageURL: url,
       tags,
       previewURL: preview,
       previewWidth: width,
       previewHeight: height
-    }: {
-      [key: string]: string
     }) => ({url, tags, preview, width, height}))
   })
 })

@@ -38,7 +38,16 @@ if (process.env.MONGO_URI && connection.readyState === 0) {
 
 export function search(query: {
   [key: string]: any
-}) {
+}): Promise<{
+  totalHits: number
+  hits: {
+    pageURL: string
+    tags: string
+    previewURL: string
+    previewWidth: number
+    previewHeight: number
+  }[]
+}> | undefined {
   return fetch(`https://pixabay.com/api/?key=${process.env.KEY}&${new URLSearchParams(query)}`)
           .then(res => res.json())
           .then(result => {
@@ -49,7 +58,7 @@ export function search(query: {
             }
             return result
           })
-          .catch(console.error)
+          .catch(() => void 0)
 }
 
 
