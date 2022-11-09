@@ -42,7 +42,11 @@ app.route("/api").get((req, res) => {
 
 
 app.route("/search").get(async({query}, res) => {
-  query.per_page ??= "200"
+  if (!+(query.page || true)) {
+    query.page = "1"
+  }
+
+  query.per_page ||= "200"
 
   const results = await search(query)
 
