@@ -3,7 +3,7 @@ extends layout.pug
 block content
   script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous")
   - const BREAKPOINT = "md"
-  - const IMAGES_LENGTH = (images || "").length
+  - const IMAGES_LENGTH = images?.length
   header.sticky-top: nav.navbar.navbar-dark.bg-dark.px-4.border-bottom.shadow-sm(class=`navbar-expand-${BREAKPOINT}`)
     a.navbar-brand(href="/" title="Go to Home") #[i.bi.bi-images.me-2]ISAL
     button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation")
@@ -17,13 +17,55 @@ block content
   main.text-center.mb-3.px-1.px-sm-2
     if IMAGES_LENGTH
       each image in images
-        a(href=image.url target="_blank" rel="noreferrer")
-          img.rounded-1.shadow-sm.m-1(src=image.preview width=image.width height=image.height alt=image.tags title=image.tags loading="lazy")
+        - const id = `_${image.id}`
+        article.d-inline-block.m-1
+          a(data-bs-toggle="modal" href=`#${id}` role="button")
+            img.rounded-1(src=image.previewURL width=image.previewWidth height=image.previewHeight alt=image.tags title="More Information" loading="lazy")
+          .modal.fade(id=id tabindex="-1" aria-hidden="true")
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  .d-flex.flex-wrap.gap-1
+                    each tag in image.tags.split(", ")
+                      span.badge.text-bg-primary.text-break.rounded-pill.shadow-sm=tag
+                  button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+                .modal-body
+                  img.img-fluid.rounded-1(src=image.webformatURL alt="image" width=image.webformatWidth loading="lazy")
+                  .d-flex.align-items-center.gap-3.mt-3
+                    a.d-flex.align-items-center.gap-2.lh-1.text-start.text-break.text-decoration-none(href=`https://pixabay.com/users/${image.user}-${image.user_id}/` target="_blank" rel="noreferrer" title="Visit author profile")
+                      if image.userImageURL
+                        - const imgSize = 32
+                        img.rounded-circle(src=image.userImageURL alt="user avatar" width=imgSize height=imgSize)
+                      | #{image.user}
+                    span.text-muted.text-nowrap.ms-auto(title="Dimensions")
+                      i.bi.bi-bounding-box-circles.me-1
+                      | #{`${image.imageWidth} x ${image.imageHeight}`}
+                  ul.list-unstyled.d-flex.flex-wrap.justify-content-evenly.gap-3.fw-light.text-nowrap.text-secondary.mt-3.mb-0
+                    li(title="Collections")
+                      i.bi.bi-bookmarks-fill.me-1
+                      | #{image.collections}
+                    li(title="Views")
+                      i.bi.bi-eye-fill.me-1
+                      | #{image.views}
+                    li(title="Comments")
+                      i.bi.bi-chat-text-fill.me-1
+                      | #{image.comments}
+                    li: a.text-decoration-none(href=image.pageURL target="_blank" rel="noreferrer" title="Likes")
+                      i.bi.bi-heart-fill.text-danger.me-1
+                      | #{image.likes}
+                .modal-footer
+                  span.align-self-end.text-black-50.me-auto(title="Size")
+                    i.bi.bi-file-earmark-binary-fill.me-1
+                    | #{`${Math.round(image.imageSize / 10**2) / 10} KB`}
+                  a.btn.btn-success(href=image.pageURL target="_blank" rel="noreferrer" title="Visit page URL")
+                    i.bi.bi-download.me-2
+                    | #{image.downloads}
+                  button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Close
     else
       h1.mx-2 Ooops! There are no results#[i.bi.bi-emoji-frown-fill.text-warning.m-3]
   nav.mx-auto
-    - const {page = 1, ...rest} = query
-    - const {per_page = 200} = rest
+    - const { page = 1, ...rest } = query
+    - const { per_page = 200 } = rest
     - const URL = `/search?${new URLSearchParams(rest)}`
     ul.pagination.pagination-lg
       unless page < 2 || !IMAGES_LENGTH

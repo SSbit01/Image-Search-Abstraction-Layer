@@ -1,6 +1,6 @@
 {
   "name": "image-search-abstraction-layer",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "description": "Image search website that makes use of the Pixabay API",
   "author": "SSbit01",
   "license": "MIT",

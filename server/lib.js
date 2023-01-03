@@ -31,8 +31,11 @@ if (process.env.MONGO_URI && connection.readyState === 0) {
 }
 
 
+const LIMIT_RECENT_SEARCHES = 100
+
+
 module.exports = {
-  LIMIT_RECENT_SEARCHES: 100,
+  LIMIT_RECENT_SEARCHES,
   
   search(query) {
     return axios.get(`https://pixabay.com/api/?key=${process.env.PIXABAY_KEY}&${new URLSearchParams(query)}`)
@@ -47,7 +50,7 @@ module.exports = {
       .catch(() => void 0)
   },
   
-  getRecentSearches({ select = "-_id value date", limit = this.LIMIT_RECENT_SEARCHES } = {}) {
+  getRecentSearches({ select = "-_id value date", limit = LIMIT_RECENT_SEARCHES } = {}) {
     return connection.readyState === 1 ? models[MODEL_NAME]?.find({}).select(select).sort("-date").limit(limit).lean() : LOCAL_RECENT_SEARCHES.slice(-limit).reverse()
   }
 }

@@ -57,13 +57,7 @@ app.route("/search").get(async({ query }, res) => {
   res.render("search", {
     query,
     total: results?.totalHits,
-    images: results?.hits.map(({
-      pageURL: url,
-      tags,
-      previewURL: preview,
-      previewWidth: width,
-      previewHeight: height
-    }) => ({ url, tags, preview, width, height }))
+    images: results?.hits
   })
 })
 

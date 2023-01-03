@@ -9,9 +9,9 @@ block content
     ul.list-group.shadow-sm.mb-3
       li.list-group-item.list-group-item-success
         - const SEARCH_API = "/api/search"
-        h3 Route: #[a(href=SEARCH_API): strong #{SEARCH_API}{parameters}]
+        h3 Route: #[a(href=SEARCH_API) #{SEARCH_API}{parameters}]
         p Use this endpoint according to the #[a(href="https://pixabay.com/api/docs/" target="_blank" rel="noreferrer") Pixabay API documentation]
       li.list-group-item.list-group-item-secondary
         - const RECENT_API = "/api/recent"
-        h3 Route: #[a(href=RECENT_API): strong= RECENT_API]
+        h3 Route: #[a(href=RECENT_API)= RECENT_API]
         p Returns the last #[strong= limitRecentSearches] search strings submitted to the server
