@@ -1,6 +1,6 @@
 mixin searchForm(lg)
   form(action="search")
     .input-group(class=lg && ["input-group-lg", "shadow-sm"])
-      - const {q} = query || {}
-      input.form-control(type="search" name="q" maxlength="100" placeholder="Cats..." value=q autofocus)
-      button.btn.btn-success.bi.bi-search(type="submit")
+      - const { q } = query || {}
+      input.form-control(type="search" name="q" maxlength="100" placeholder="Cats..." value=query && query.q autofocus)
+      button.btn.btn-success.bi.bi-search(type="submit" title="Search")

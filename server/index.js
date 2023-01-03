@@ -1,10 +1,14 @@
-import "dotenv/config"
+require("dotenv/config")
 
-import express from "express"
-import helmet from "helmet"
+if (!process.env.PIXABAY_KEY) {
+  console.warn("PIXABAY_KEY environment variable is not defined! Searches won't work.")
+}
 
-import {search, getRecentSearches, LIMIT_RECENT_SEARCHES} from "./lib"
-import apiRoutes from "./api"
+const express = require("express"),
+      helmet = require("helmet"),
+      //
+      { search, getRecentSearches, LIMIT_RECENT_SEARCHES } = require("./lib"),
+      apiRoutes = require("./api")
 
 
 
@@ -37,12 +41,12 @@ app.route("/").get((req, res) => {
 
 
 app.route("/api").get((req, res) => {
-  res.render("api", {limitRecentSearches: LIMIT_RECENT_SEARCHES})
+  res.render("api", { limitRecentSearches: LIMIT_RECENT_SEARCHES })
 })
 
 
-app.route("/search").get(async({query}, res) => {
-  if (!+(query.page || true)) {
+app.route("/search").get(async({ query }, res) => {
+  if (!+query.page) {
     query.page = "1"
   }
 
@@ -59,13 +63,13 @@ app.route("/search").get(async({query}, res) => {
       previewURL: preview,
       previewWidth: width,
       previewHeight: height
-    }) => ({url, tags, preview, width, height}))
+    }) => ({ url, tags, preview, width, height }))
   })
 })
 
 
 app.route("/recent").get(async(req, res) => {
-  res.render("recent", {data: await getRecentSearches?.()})
+  res.render("recent", { data: await getRecentSearches() })
 })
 
 

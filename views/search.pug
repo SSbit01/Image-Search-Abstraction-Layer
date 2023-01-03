@@ -1,7 +1,7 @@
 extends layout.pug
 
 block content
-  script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous")
+  script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous")
   - const BREAKPOINT = "md"
   - const IMAGES_LENGTH = (images || "").length
   header.sticky-top: nav.navbar.navbar-dark.bg-dark.px-4.border-bottom.shadow-sm(class=`navbar-expand-${BREAKPOINT}`)
@@ -17,8 +17,8 @@ block content
   main.text-center.mb-3.px-1.px-sm-2
     if IMAGES_LENGTH
       each image in images
-        a(href=image.url target="_blank")
-          img.img-thumbnail.m-1.shadow-sm(src=image.preview width=image.width height=image.height alt=image.tags title=image.tags loading="lazy")
+        a(href=image.url target="_blank" rel="noreferrer")
+          img.rounded-1.shadow-sm.m-1(src=image.preview width=image.width height=image.height alt=image.tags title=image.tags loading="lazy")
     else
       h1.mx-2 Ooops! There are no results#[i.bi.bi-emoji-frown-fill.text-warning.m-3]
   nav.mx-auto
