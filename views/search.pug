@@ -67,7 +67,7 @@ block content
     - const { page = 1, ...rest } = query
     - const { per_page = 200 } = rest
     - const URL = `/search?${new URLSearchParams(rest)}`
-    ul.pagination.pagination-lg
+    ul.pagination.flex-wrap.justify-content-center
       unless page < 2 || !IMAGES_LENGTH
         li.page-item(title="Previous Page"): a.page-link.bi.bi-chevron-double-left(href=`${URL}&page=${+page - 1}`)
       - let i = 1
