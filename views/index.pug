@@ -10,3 +10,5 @@ block content
     .btn-group-vertical.btn-group-lg.shadow.mb-3(role="group")
       a.btn.btn-primary(href="/api") #[i.bi.bi-server.me-2]API
       a.btn.btn-secondary(href="/recent") #[i.bi.bi-clock-history.me-2]Recent Searches
+      if repository
+        a.btn.btn-dark(href=repository target="_blank" rel="noreferrer") #[i.bi.bi-github.me-2]Repository#[i.bi.bi-box-arrow-up-right.ms-3]

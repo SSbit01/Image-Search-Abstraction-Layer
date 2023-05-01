@@ -13,6 +13,7 @@ const express = require("express"),
 
 
 const port = process.env.PORT || 3000,
+      repository = "https://github.com/SSbit01/Image-Search-Abstraction-Layer",
       //
       app = express()
 
@@ -36,7 +37,7 @@ apiRoutes(app)
 
 
 app.route("/").get((req, res) => {
-  res.render("index")
+  res.render("index", { repository })
 })
 
 
@@ -55,6 +56,7 @@ app.route("/search").get(async({ query }, res) => {
   const results = await search(query)
 
   res.render("search", {
+    repository,
     query,
     total: results?.totalHits,
     images: results?.hits

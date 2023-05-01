@@ -12,6 +12,8 @@ block content
       ul.navbar-nav.me-auto.mb-2(class=`mb-${BREAKPOINT}-0`)
         li.nav-item: a.nav-link(href="/api") #[i.bi.bi-server.me-2]API
         li.nav-item: a.nav-link(href="/recent") #[i.bi.bi-clock-history.me-2]Recent Searches
+        if repository
+          li.nav-item: a.nav-link(href=repository target="_blank" rel="noreferrer") #[i.bi.bi-github.me-2]Repository
       include includes/mixins/searchForm.pug
       +searchForm
   main.text-center.mb-3.px-1.px-sm-2
