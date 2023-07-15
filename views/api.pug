@@ -8,14 +8,14 @@ block content
   include includes/back.pug
   header.container.text-center.mx-auto.mt-auto
     h1.mt-3 #[i.bi.bi-server.me-2]API
-    h4 The server only accepts #[strong GET] requests
-  main.container.mx-auto.mb-auto
+    h4.px-3 The server only accepts #[strong GET] requests
+  main.px-3.mx-auto.mb-auto
     ul.list-group.shadow-sm.mb-3
       li.list-group-item.list-group-item-success
         - const SEARCH_API = "/api/search"
         h3 Route: #[a(href=SEARCH_API) #{SEARCH_API}{parameters}]
-        p Use this endpoint according to the #[a(href="https://pixabay.com/api/docs/" target="_blank" rel="noreferrer noopener") Pixabay API documentation]
+        p Use this endpoint according to the #[a(href="https://pixabay.com/api/docs/" target="_blank" rel="noreferrer noopener") Pixabay API documentation].
       li.list-group-item.list-group-item-secondary
         - const RECENT_API = "/api/recent"
         h3 Route: #[a(href=RECENT_API)= RECENT_API]
-        p Returns the last #[strong= limitRecentSearches] search strings submitted to the server
+        p Returns the last #[strong= limitRecentSearches] search strings submitted to the server. Search strings are stored in a #[strong MongoDB Atlas] database.
