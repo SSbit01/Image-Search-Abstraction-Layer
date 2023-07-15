@@ -1,6 +1,6 @@
 # Image Search Abstraction Layer
 
-An image search website that makes use of the [*Pixabay API*](https://pixabay.com/api/docs/).
+A simple and easy-to-use image search website that makes use of the [Pixabay API](https://pixabay.com/api/docs/). It can store search strings in a **MongoDB Atlas** database.
 
 Make sure to define the `PIXABAY_KEY` environment variable and install local packages.
 

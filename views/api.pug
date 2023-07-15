@@ -1,5 +1,9 @@
 extends layout.pug
 
+block head
+  title API - ISAL
+  meta(name="description" content="ISAL API web page information. The server only accepts GET requests.")
+
 block content
   include includes/back.pug
   header.container.text-center.mx-auto.mt-auto
@@ -10,7 +14,7 @@ block content
       li.list-group-item.list-group-item-success
         - const SEARCH_API = "/api/search"
         h3 Route: #[a(href=SEARCH_API) #{SEARCH_API}{parameters}]
-        p Use this endpoint according to the #[a(href="https://pixabay.com/api/docs/" target="_blank" rel="noreferrer") Pixabay API documentation]
+        p Use this endpoint according to the #[a(href="https://pixabay.com/api/docs/" target="_blank" rel="noreferrer noopener") Pixabay API documentation]
       li.list-group-item.list-group-item-secondary
         - const RECENT_API = "/api/recent"
         h3 Route: #[a(href=RECENT_API)= RECENT_API]
