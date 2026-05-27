@@ -9,7 +9,8 @@ block content
     include includes/mixins/searchForm.pug
     +searchForm(true)
     p.mb-0.
-      #[strong Privacy:] This website stores search queries in a MongoDB Atlas database hosted on AWS in the eu-west-1 (Ireland) region.
+      #[strong Privacy:]
+      This website is hosted on Render (Frankfurt) and stores search queries in a MongoDB Atlas database hosted on AWS in the eu-west-1 (Ireland) region.
       Only the search text itself is stored; no personal identifiers are collected by the platform.
       Submitted searches are displayed publicly on the #[a.link.text-decoration-none(href="/recent") Recent Searches] page.
     .btn-group-vertical.btn-group-lg.shadow.mb-5(role="group")
