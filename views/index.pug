@@ -1,16 +1,19 @@
 extends layout.pug
 
 block content
-  header.container.text-center.mx-auto.mt-auto
-    hgroup.mt-4
+  header.container.mx-auto.mt-auto
+    hgroup.text-center.mt-4
       h1 #[i.bi.bi-images.me-3]#[b I]mage #[b S]earch#[i.bi.bi-search.mx-3]#[b A]bstraction #[b L]ayer#[i.bi.bi-layers.ms-3]
-      p.m-0 A simple and easy-to-use image search website that makes use of the #[a(href="https://pixabay.com/api/docs/" target="_blank" rel="noopener noreferrer") Pixabay API]
-    a.btn.btn-link.btn-lg(href="https://ssbit01.github.io/" target="_blank" rel="noopener noreferrer") Created By #[strong: i SSbit01]
+      p.m-0 Simple and easy-to-use image search website that makes use of the Pixabay API
   main.container-md.d-grid.gap-5.mx-auto.mb-auto
     include includes/mixins/searchForm.pug
     +searchForm(true)
+    p.mb-0.
+      #[strong Privacy:] This website stores search queries in a MongoDB Atlas database hosted on AWS in the eu-west-1 (Ireland) region.
+      Only the search text itself is stored; no personal identifiers are collected by the platform.
+      Submitted searches are displayed publicly on the #[a.link.text-decoration-none(href="/recent") Recent Searches] page.
     .btn-group-vertical.btn-group-lg.shadow.mb-5(role="group")
       a.btn.btn-primary(href="/api") #[i.bi.bi-server.me-2]API
       a.btn.btn-secondary(href="/recent") #[i.bi.bi-clock-history.me-2]Recent Searches
       if repository
-        a.btn.btn-dark(href=repository target="_blank" rel="noopener noreferrer") #[i.bi.bi-github.me-2]Repository#[i.bi.bi-box-arrow-up-right.ms-3]
+        a.btn.btn-dark(href=repository, target="_blank", rel="noopener noreferrer") #[i.bi.bi-github.me-2]Repository#[i.bi.bi-box-arrow-up-right.ms-3]

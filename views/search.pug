@@ -1,86 +1,115 @@
 extends layout.pug
 
 block head
-  - const { page = 1, ...rest } = query
-  - const { q, per_page = 200 } = rest
-  title=`${q} - ISAL (${page || 1})`
+  - const { page = 1, ...rest } = query;
+  - const { q, per_page = 200 } = rest;
+  title= `${q} - ISAL (${page || 1})`
 
 block content
-  script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous")
-  - const BREAKPOINT = "md"
-  - const IMAGES_LENGTH = images?.length
+  - const BREAKPOINT = "md";
+  - const IMAGES_LENGTH = images?.length;
   header.sticky-top: nav.navbar.navbar-dark.bg-dark.px-4.border-bottom.shadow-sm(class=`navbar-expand-${BREAKPOINT}`)
-    a.navbar-brand(href="/" title="Go to Home") #[i.bi.bi-images.me-2]ISAL
-    button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation")
+    a.navbar-brand(href="/", title="Go to Home") #[i.bi.bi-images.me-2]ISAL
+    button.navbar-toggler(
+      type="button",
+      data-bs-toggle="collapse",
+      data-bs-target="#navbarContent",
+      aria-controls="navbarContent",
+      aria-expanded="false",
+      aria-label="Toggle navigation"
+    )
       span.navbar-toggler-icon
     #navbarContent.collapse.navbar-collapse.pb-2(class=`pb-${BREAKPOINT}-0`)
       ul.navbar-nav.me-auto.mb-3(class=`mb-${BREAKPOINT}-0`)
         li.nav-item: a.nav-link(href="/api") #[i.bi.bi-server.me-2]API
         li.nav-item: a.nav-link(href="/recent") #[i.bi.bi-clock-history.me-2]Recent Searches
         if repository
-          li.nav-item: a.nav-link(href=repository target="_blank" rel="noopener noreferrer") #[i.bi.bi-github.me-2]Repository
+          li.nav-item: a.nav-link(href=repository, target="_blank", rel="noopener noreferrer") #[i.bi.bi-github.me-2]Repository
       include includes/mixins/searchForm.pug
       +searchForm
   main.text-center.mb-3.px-1.px-sm-2
     if IMAGES_LENGTH
       each image in images
-        - const id = `_${image.id}`
+        - const id = `_${image.id}`;
         article.d-inline-block.m-1
-          a(data-bs-toggle="modal" href=`#${id}` role="button")
-            img.rounded-1(src=image.previewURL width=image.previewWidth height=image.previewHeight alt=image.tags title="More Information" loading="lazy")
-          .modal.fade(id=id tabindex="-1" aria-hidden="true")
+          a(data-bs-toggle="modal", href=`#${id}`, role="button")
+            img.rounded-1(
+              src=image.previewURL,
+              width=image.previewWidth,
+              height=image.previewHeight,
+              alt=image.tags,
+              title="More Information",
+              loading="lazy"
+            )
+          .modal.fade(id=id, tabindex="-1", aria-hidden="true")
             .modal-dialog
               .modal-content
                 .modal-header
                   .d-flex.flex-wrap.gap-1
                     each tag in image.tags.split(", ")
-                      span.badge.text-bg-primary.text-break.rounded-pill.shadow-sm=tag
-                  button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+                      span.badge.text-bg-primary.text-break.rounded-pill.shadow-sm= tag
+                  button.btn-close(type="button", data-bs-dismiss="modal", aria-label="Close")
                 .modal-body
-                  img.img-fluid.rounded-1(src=image.webformatURL alt="image" height=image.webformatHeight width=image.webformatWidth loading="lazy")
+                  img.img-fluid.rounded-1(
+                    src=image.webformatURL,
+                    alt="image",
+                    height=image.webformatHeight,
+                    width=image.webformatWidth,
+                    loading="lazy"
+                  )
                   .d-flex.flex-wrap.align-items-center.mt-3
-                    a.d-flex.align-items-center.gap-2.lh-1.text-start.text-break.text-decoration-none(href=`https://pixabay.com/users/${image.user}-${image.user_id}/` target="_blank" rel="noopener noreferrer" title="Visit author profile")
+                    a.d-flex.align-items-center.gap-2.lh-1.text-start.text-break.text-decoration-none(
+                      href=`https://pixabay.com/users/${image.user}-${image.user_id}/`,
+                      target="_blank",
+                      rel="noopener noreferrer",
+                      title="Visit author profile"
+                    )
                       if image.userImageURL
-                        - const imgSize = 32
-                        img.rounded-circle(src=image.userImageURL alt="user avatar" width=imgSize height=imgSize)
-                      | #{image.user}
+                        - const imgSize = 32;
+                        img.rounded-circle(src=image.userImageURL, alt="user avatar", width=imgSize, height=imgSize)
+                      | #{ image.user }
                     span.text-muted.text-nowrap.ms-auto(title="Dimensions")
                       i.bi.bi-bounding-box-circles.me-1
-                      | #{`${image.imageWidth} x ${image.imageHeight}`}
+                      | #{ `${image.imageWidth} x ${image.imageHeight}` }
                   ul.list-unstyled.d-flex.flex-wrap.justify-content-evenly.gap-3.fw-light.text-nowrap.text-secondary.mt-3.mb-0
                     li(title="Collections")
                       i.bi.bi-bookmarks-fill.me-1
-                      | #{image.collections}
+                      | #{ image.collections }
                     li(title="Views")
                       i.bi.bi-eye-fill.me-1
-                      | #{image.views}
+                      | #{ image.views }
                     li(title="Comments")
                       i.bi.bi-chat-text-fill.me-1
-                      | #{image.comments}
-                    li: a.text-decoration-none(href=image.pageURL target="_blank" rel="noopener noreferrer" title="Likes")
+                      | #{ image.comments }
+                    li: a.text-decoration-none(href=image.pageURL, target="_blank", rel="noopener noreferrer", title="Likes")
                       i.bi.bi-heart-fill.text-danger.me-1
-                      | #{image.likes}
+                      | #{ image.likes }
                 .modal-footer
                   span.align-self-end.text-black-50.me-auto(title="Size")
                     i.bi.bi-file-earmark-binary-fill.me-1
-                    | #{`${Math.round(image.imageSize / 10**2) / 10} KB`}
-                  a.btn.btn-success(href=image.pageURL target="_blank" rel="noopener noreferrer" title="Visit page URL")
+                    | #{ `${Math.round(image.imageSize / 10**2) / 10} KB` }
+                  a.btn.btn-success(href=image.pageURL, target="_blank", rel="noopener noreferrer", title="Visit page URL")
                     i.bi.bi-download.me-2
-                    | #{image.downloads}
-                  button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Close
+                    | #{ image.downloads }
+                  button.btn.btn-secondary(type="button", data-bs-dismiss="modal") Close
+      script(
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js",
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI",
+        crossorigin="anonymous"
+      )
     else
       h1.mx-2 Ooops! There are no results#[i.bi.bi-emoji-frown-fill.text-warning.m-3]
   nav.mx-auto
-    - const URL = `/search?${new URLSearchParams(rest)}`
+    - const URL = `/search?${new URLSearchParams(rest)}`;
     ul.pagination.flex-wrap.justify-content-center
       unless page < 2 || !IMAGES_LENGTH
         li.page-item(title="Previous Page"): a.page-link.bi.bi-chevron-double-left(href=`${URL}&page=${+page - 1}`)
-      - let i = 1
+      - let i = 1;
       while per_page * (i - 1) < total
         if i == page
-          li.page-item.active(title=`Current Page: ${page}` aria-current="page"): span.page-link= page
+          li.page-item.active(title=`Current Page: ${page}`, aria-current="page"): span.page-link= page
         else
           li.page-item(title=`Page ${i}`): a.page-link(href=`${URL}&page=${i}`)= i
-        - i++
+        - i++;
       if per_page * page < total
         li.page-item(title="Next Page"): a.page-link.bi.bi-chevron-double-right(href=`${URL}&page=${+page + 1}`)
